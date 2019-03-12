@@ -114,12 +114,13 @@ public class DriverClass extends JFrame {
 	 * @param args
 	 *            UNUSED Commandline arg
 	 */
+	/*
 	public static void main(String[] args) {
 
 		DriverClass dc = new DriverClass();
 		dc.setVisible(true);
 
-	}
+	} */
 
 	public class NewIPHandler implements ActionListener {
 		@Override
