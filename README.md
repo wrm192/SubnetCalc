@@ -2,5 +2,7 @@
 
 Used to calculate the range of subnets on any particular IP given the predefined class structures of IPs. 
 
-//TODO 
-Allow the user to determine the amount of IPs they want, also change to a classess system which is more common for intranets. 
+Updating to API with spring boot.
+ 
+Front end TBD
+git
