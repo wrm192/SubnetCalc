@@ -1,3 +1,5 @@
+import calculations.SNCalc;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -119,7 +121,7 @@ public class DriverClass extends JFrame {
 
 	}
 
-	private class NewIPHandler implements ActionListener {
+	public class NewIPHandler implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			// System.out.println("Please enter a ipAddress x.x.x.x");
@@ -163,7 +165,7 @@ public class DriverClass extends JFrame {
 		validate();
 		repaint();
 	}
-	private class LoopSubnetHandler implements ActionListener {
+	public class LoopSubnetHandler implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			data = new String[oSNC.oSB.maxSubnets][5];
@@ -172,7 +174,7 @@ public class DriverClass extends JFrame {
 		}
 	}
 
-	private class RangeHandler implements ActionListener {
+	public class RangeHandler implements ActionListener {
 		public void actionPerformed(ActionEvent ae) {
 			rangeOne = new JTextField(10);
 			rangeTwo = new JTextField(10);
@@ -206,7 +208,7 @@ public class DriverClass extends JFrame {
 		}
 	}
 
-	private class InfoHandler implements ActionListener {
+	public class InfoHandler implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			//remove(infoL);

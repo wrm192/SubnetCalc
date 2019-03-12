@@ -1,5 +1,7 @@
+package calculations;
 
 public class HostBits {
+	
 	int suffix;
 	int hostBits;
 	String startingBin;

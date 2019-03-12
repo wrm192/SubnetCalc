@@ -1,15 +1,17 @@
+package calculations;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SNCalc {
-	int m_suffix;
-	String m_startingBin;
-	int m_startingRange;
-	int m_endRange;
-	HostBits oHB;
-	SubnetBits oSB;
-	LockedBits oLB;
-	String[][] data;
+	public int m_suffix;
+	public String m_startingBin;
+	public int m_startingRange;
+	public int m_endRange;
+	public HostBits oHB;
+	public SubnetBits oSB;
+	public LockedBits oLB;
+	public String[][] data;
 
 	public SNCalc(int suffix, String binary) throws Exception {
 		this.m_suffix = suffix;
