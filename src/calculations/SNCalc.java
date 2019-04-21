@@ -55,7 +55,6 @@ public class SNCalc {
 	}
 
 	private String wholeString(String locked, String sub, String host) {
-
 		String totalBin = "";
 		totalBin += locked + sub + host;
 		return totalBin;
@@ -83,19 +82,19 @@ public class SNCalc {
 
 		for (int i = m_startingRange; i < m_endRange; i++) {
 			IpAddressInfo current = new IpAddressInfo();
-			for (int j = 1; j <= oHB.binNeeded.length; j++) {
-				String currentIp = printIP(convertToIP(wholeString(this.lockedBits.getBinaryString(), this.subnetBits.getRangeBinary(), oHB.binNeeded[j - 1])));
+			for (int j = 0; j < oHB.binNeeded.length; j++) {
+				String currentIp = printIP(convertToIP(wholeString(this.lockedBits.getBinaryString(), this.subnetBits.getRangeBinary(), oHB.binNeeded[j])));
 				switch (j) {
-					case 1:
+					case 0:
 						current.setWireAddress(currentIp);
 						break;
-					case 2:
+					case 1:
 						current.setFirstHost(currentIp);
 						break;
-					case 3:
+					case 2:
 						current.setLastHost(currentIp);
 						break;
-					case 4:
+					case 3:
 						current.setBroadcastAddress(currentIp);
 						break;
 				}
