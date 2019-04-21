@@ -1,4 +1,8 @@
+package src.calculations;
 
+import lombok.Data;
+
+@Data
 public class SubnetBits {
 
 	String classType;
@@ -7,7 +11,7 @@ public class SubnetBits {
 	String startingSubnet;
 	String rangeBinary;
 	String binaryString;
-	int maxSubnets;
+	public int maxSubnets;
 	int suffix;
 
 	public SubnetBits(int suffix, String binary, String classType) {

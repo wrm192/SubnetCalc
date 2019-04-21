@@ -1,4 +1,8 @@
+package src.calculations;
 
+import lombok.Data;
+
+@Data
 public class LockedBits {
 
 	int suffix;
