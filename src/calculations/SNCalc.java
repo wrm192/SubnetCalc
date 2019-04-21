@@ -1,9 +1,17 @@
-package calculations;
+package src.calculations;
+
+
+import lombok.Data;
+import src.dto.IpAddressInfo;
+import src.exceptions.InvalidIpAddressException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
+
+@Data
 public class SNCalc {
+
 	public int m_suffix;
 	public String m_startingBin;
 	public int m_startingRange;
@@ -13,14 +21,14 @@ public class SNCalc {
 	public LockedBits oLB;
 	public String[][] data;
 
-	public SNCalc(int suffix, String binary) throws Exception {
+	public SNCalc(int suffix, String binary) {
 		this.m_suffix = suffix;
 		this.m_startingBin = binary;
 		m_startingRange = 0;
 
 		int firstOctValue = Integer.parseInt(binary.substring(0, 8), 2);
 		if (firstOctValue == 127 || firstOctValue > 223) {
-			throw new Exception(); // if invalid ip and subnet it returns to menu.
+			throw new InvalidIpAddressException("Invalid Ip range");
 		} else if (firstOctValue < 128) {
 			oSB = new SubnetBits(suffix, binary, "A");
 			oLB = new LockedBits(suffix, binary, "A");
@@ -36,6 +44,7 @@ public class SNCalc {
 		m_endRange = oSB.maxSubnets;
 		data = new String[oSB.maxSubnets][4];
 	}
+
 
 	public void setRanges(int start, int end) {
 
@@ -84,52 +93,33 @@ public class SNCalc {
 		return octets[0] + "." + octets[1] + "." + octets[2] + "." + octets[3];
 	}
 
-	public void loopSubnets() {
-		String[][] outputs = new String[oSB.maxSubnets][5];
-
+	public List<IpAddressInfo> loopSubnets() {
+		List<IpAddressInfo> ips= new ArrayList<>();
 		oSB.setSubnet(m_startingRange);
-		int count = 0;
+
 		for (int i = m_startingRange; i < m_endRange; i++) {
-			outputs[count][0] = Integer.toString(i);
+			IpAddressInfo current = new IpAddressInfo();
 			for (int j = 1; j <= oHB.binNeeded.length; j++) {
-				// System.out.println("here??");
-				outputs[count][j] = printIP(
-						convertToIP(wholeString(oLB.binaryString, oSB.rangeBinary, oHB.binNeeded[j - 1]))); // creates
-																											// each
-																											// output
-																											// string
-				if (j == 4) {
-					data = outputs;
+				String currentIp = printIP(convertToIP(wholeString(oLB.binaryString, oSB.rangeBinary, oHB.binNeeded[j - 1])));
+				switch (j) {
+					case 1:
+						current.setWireAddress(currentIp);
+						break;
+					case 2:
+						current.setFirstHost(currentIp);
+						break;
+					case 3:
+						current.setLastHost(currentIp);
+						break;
+					case 4:
+						current.setNetworkAddress(currentIp);
+						break;
 				}
 			}
+			ips.add(current);
 			oSB.addOne(oSB.rangeBinary);
-			count++;
 		}
-	}
-		
-	public String printIPInfo() {
-		int copy = m_startingRange;
-		int endCopy = m_endRange;
-		String printOut = "";
-		int subnetNumber = Integer.parseInt(oSB.binaryString, 2);
-		m_startingRange = 0;
-		m_endRange = 1;
-		printOut = "Max Subnets: " + oSB.maxSubnets + "\nMax IPs: " + oHB.maxHosts + "\nClassType: " + oSB.classType
-				+ "\nIP: " + printIP(convertToIP(m_startingBin)) + "/" + m_suffix + "\nSubnet Number: " + subnetNumber
-				+ "\nSubnet Mask: " + printIP(convertToIP(getSubnetMask())) + "\nWire Address: "
-				+ printIP(convertToIP(wholeString(oLB.binaryString, oSB.binaryString, oHB.binNeeded[0])))
-				+ "\nFirst Usable Host: "
-				+ printIP(convertToIP(wholeString(oLB.binaryString, oSB.binaryString, oHB.binNeeded[1])))
-				+ "\nLast Usable Host: "
-				+ printIP(convertToIP(wholeString(oLB.binaryString, oSB.binaryString, oHB.binNeeded[2])))
-				+ "\nBroadcast Address: "
-				+ printIP(convertToIP(wholeString(oLB.binaryString, oSB.binaryString, oHB.binNeeded[3])));
-
-		m_startingRange = copy;
-		m_endRange = endCopy;
-
-		return printOut;
-
+		return  ips;
 	}
 
 	public String getSubnetMask() {

@@ -1,5 +1,8 @@
-package calculations;
+package src.calculations;
 
+import lombok.Data;
+
+@Data
 public class HostBits {
 	
 	int suffix;
@@ -30,7 +33,6 @@ public class HostBits {
 			binNeeded[3] += "1";
 			count++;
 		}
-		
 
 		count = 0;
 		while (count < (hostBits - 1)) {
