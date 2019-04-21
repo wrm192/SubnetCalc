@@ -5,64 +5,61 @@ import lombok.Data;
 @Data
 public class SubnetBits {
 
-	String classType;
-	int subnetBits;
-	int lockedBits;
-	String startingSubnet;
-	String rangeBinary;
-	String binaryString;
-	public int maxSubnets;
-	int suffix;
+	private String classType;
+	private int subnetBits;
+	private String rangeBinary;
+	private int maxSubnets;
 
-	public SubnetBits(int suffix, String binary, String classType) {
-		this.suffix = suffix;
+
+	public String getClassType() {
+		return classType;
+	}
+	String getRangeBinary() {
+		return rangeBinary;
+	}
+
+	int getMaxSubnets() {
+		return maxSubnets;
+	}
+
+	SubnetBits(int suffix, String classType) {
+		int lockedBits;
 		this.classType = classType;
 		this.rangeBinary = "";
 
 		if (classType.equals("A")) {
-			this.lockedBits = 8;
+			lockedBits = 8;
 			this.subnetBits = suffix - lockedBits;
 		} else if (classType.equals("B")) {
-			this.lockedBits = 16;
+			lockedBits = 16;
 			this.subnetBits = suffix - lockedBits;
 		} else {
-			this.lockedBits = 24;
+			lockedBits = 24;
 			this.subnetBits = suffix - lockedBits;
 		}
 
 		this.maxSubnets = (int) Math.pow(2, this.subnetBits);
-
-		binaryString = binary.substring(lockedBits, (lockedBits + subnetBits));
-
 	}
 
-	public void addOne(String binaryToAdd) {
-		int count = 0;
+	void addOne(String binaryToAdd) {
 		int x = (1 + Integer.parseInt(binaryToAdd, 2));
-		String newBinary = Integer.toString(x, 2);
-		String paddedString = "";
-		
-		while (count < subnetBits - newBinary.length()) {
-			paddedString += "0";
-			count++;
-		}
-		paddedString += newBinary;
-
-		rangeBinary = paddedString;
+		this.addAmount(x);
 	}
 
-	public void setSubnet(int subnetStart) {
-		int count = 0;
-		String newString = Integer.toString(subnetStart, 2);
-		String paddedString = "";
+	void setSubnet(int subnetStart) {
+		this.addAmount(subnetStart);
+	}
 
-		while (count < subnetBits - newString.length()) {
-			paddedString += "0";
+	private void addAmount(int add) {
+		int count = 0;
+		String newString = Integer.toString(add, 2);
+		StringBuilder temp = new StringBuilder();
+
+		while(count < this.subnetBits - newString.length()) {
+			temp.append("0");
 			count++;
 		}
-
-		paddedString += newString;
-		rangeBinary = paddedString;
-
+		temp.append(newString);
+		rangeBinary = temp.toString();
 	}
 }

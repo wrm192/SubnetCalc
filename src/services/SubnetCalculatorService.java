@@ -12,9 +12,6 @@ import java.util.List;
 public class SubnetCalculatorService {
 
 
-    public SubnetCalculatorService() {
-        //this.ipAddressResponse = new IpAddressResponse(new IpAddressInfo("192.100.110.11")); // this is for test.
-    }
     public IpAddressResponse buildIpList(String ip, int suffix) {
         StringBuilder wholeBin = new StringBuilder();
         String[] split = ip.split("\\."); // parse the string for the following format.
@@ -22,9 +19,11 @@ public class SubnetCalculatorService {
 
         SNCalc oSNC = new SNCalc(suffix, wholeBin.toString());
 
-        List<IpAddressInfo> addressInfos = oSNC.loopSubnets();
-
-        return new IpAddressResponse(ip, suffix, addressInfos);
-
+        List<IpAddressInfo> addressInfos = oSNC.buildListOfSubnets();
+        IpAddressResponse ipAddressResponse = new IpAddressResponse(ip, suffix, addressInfos);
+        ipAddressResponse.setNumOfSubnets(oSNC.getNumOfSubnets());
+        ipAddressResponse.setClassType(oSNC.getSubnetBits().getClassType());
+        ipAddressResponse.setMaxHosts(oSNC.getoHB().getMaxHosts());
+        return ipAddressResponse;
     }
 }

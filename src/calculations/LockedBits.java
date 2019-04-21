@@ -1,18 +1,11 @@
 package src.calculations;
 
-import lombok.Data;
+class LockedBits {
 
-@Data
-public class LockedBits {
+	private String binaryString;
 
-	int suffix;
-	int lockedBits;
-	int decValue;
-	String binaryString;
-
-	public LockedBits(int suffix, String binary, String classType) {
-		this.suffix = suffix;
-
+	LockedBits(String binary, String classType) {
+		int lockedBits;
 		if (classType.equals("A")) {
 			lockedBits = 8;
 		} else if (classType.equals("B")) {
@@ -21,8 +14,10 @@ public class LockedBits {
 			lockedBits = 24;
 		}
 		binaryString = binary.substring(0, lockedBits);
-		decValue = Integer.parseInt(binaryString, 2);
+	}
 
+	String getBinaryString() {
+		return binaryString;
 	}
 
 }

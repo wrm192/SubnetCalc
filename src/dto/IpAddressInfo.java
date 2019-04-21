@@ -1,24 +1,11 @@
 package src.dto;
 
-import lombok.Data;
-
-@Data
 public class IpAddressInfo {
 
     private String wireAddress;
     private String firstHost;
     private String lastHost;
-    private String networkAddress;
-
-    public IpAddressInfo() {
-    }
-
-    public IpAddressInfo(String wireAddress, String firstHost, String lastHost, String networkAddress) {
-        this.wireAddress = wireAddress;
-        this.firstHost = firstHost;
-        this.lastHost = lastHost;
-        this.networkAddress = networkAddress;
-    }
+    private String broadcastAddress;
 
     public String getWireAddress() {
         return wireAddress;
@@ -44,12 +31,12 @@ public class IpAddressInfo {
         this.lastHost = lastHost;
     }
 
-    public String getNetworkAddress() {
-        return networkAddress;
+    public String getBroadcastAddress() {
+        return broadcastAddress;
     }
 
-    public void setNetworkAddress(String networkAddress) {
-        this.networkAddress = networkAddress;
+    public void setBroadcastAddress(String broadcastAddress) {
+        this.broadcastAddress = broadcastAddress;
     }
 }
 

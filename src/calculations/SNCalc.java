@@ -12,72 +12,56 @@ import java.util.List;
 @Data
 public class SNCalc {
 
-	public int m_suffix;
-	public String m_startingBin;
-	public int m_startingRange;
-	public int m_endRange;
-	public HostBits oHB;
-	public SubnetBits oSB;
-	public LockedBits oLB;
-	public String[][] data;
+	private int m_startingRange;
+	private int m_endRange;
+	private HostBits oHB;
+	private SubnetBits subnetBits;
+	private LockedBits lockedBits;
+	private int numOfSubnets;
+
 
 	public SNCalc(int suffix, String binary) {
-		this.m_suffix = suffix;
-		this.m_startingBin = binary;
 		m_startingRange = 0;
 
 		int firstOctValue = Integer.parseInt(binary.substring(0, 8), 2);
 		if (firstOctValue == 127 || firstOctValue > 223) {
 			throw new InvalidIpAddressException("Invalid Ip range");
 		} else if (firstOctValue < 128) {
-			oSB = new SubnetBits(suffix, binary, "A");
-			oLB = new LockedBits(suffix, binary, "A");
-		} else if (firstOctValue >= 128 && firstOctValue < 192) {
-			oSB = new SubnetBits(suffix, binary, "B");
-			oLB = new LockedBits(suffix, binary, "B");
+			subnetBits = new SubnetBits(suffix, "A");
+			lockedBits = new LockedBits(binary, "A");
+		} else if (firstOctValue < 192) {
+			subnetBits = new SubnetBits(suffix, "B");
+			lockedBits = new LockedBits(binary, "B");
 		} else {
-			oSB = new SubnetBits(suffix, binary, "C");
-			oLB = new LockedBits(suffix, binary, "C");
+			subnetBits = new SubnetBits(suffix,"C");
+			lockedBits = new LockedBits(binary,"C");
 		}
-		oHB = new HostBits(suffix, binary);
+		oHB = new HostBits(suffix);
 
-		m_endRange = oSB.maxSubnets;
-		data = new String[oSB.maxSubnets][4];
+		m_endRange = this.subnetBits.getMaxSubnets();
+		this.numOfSubnets = m_endRange - m_startingRange;
 	}
 
-
-	public void setRanges(int start, int end) {
-
-		if (start > oSB.maxSubnets) {
-			System.out.println("Sorry that starting point isn't going to work. Will set to 0.");
-			m_startingRange = 0;
-
-		} else
-			this.m_startingRange = start;
-
-		if (end + 1 > oSB.maxSubnets) {
-			System.out.println("Sorry that end point isn't going to work. Will set to max number");
-			m_endRange = oSB.maxSubnets;
-		}
-
-		else
-			this.m_endRange = end + 1;
-
-		loopSubnets();
-
-		this.m_endRange = oSB.maxSubnets;
-		this.m_startingRange = 0;
-
+	public HostBits getoHB() {
+		return oHB;
 	}
 
-	public String wholeString(String locked, String sub, String host) {
+	public int getNumOfSubnets() {
+		return numOfSubnets;
+	}
+
+	public SubnetBits getSubnetBits() {
+		return subnetBits;
+	}
+
+	private String wholeString(String locked, String sub, String host) {
 
 		String totalBin = "";
 		totalBin += locked + sub + host;
 		return totalBin;
 	}
 
-	public int[] convertToIP(String wholeBin) {
+	private int[] convertToIP(String wholeBin) {
 		int[] octets = new int[4];
 
 		octets[0] = Integer.parseInt(wholeBin.substring(0, 8), 2);
@@ -88,19 +72,19 @@ public class SNCalc {
 		return octets;
 	}
 
-	public String printIP(int[] octets) {
+	private String printIP(int[] octets) {
 
 		return octets[0] + "." + octets[1] + "." + octets[2] + "." + octets[3];
 	}
 
-	public List<IpAddressInfo> loopSubnets() {
+	public List<IpAddressInfo> buildListOfSubnets() {
 		List<IpAddressInfo> ips= new ArrayList<>();
-		oSB.setSubnet(m_startingRange);
+		subnetBits.setSubnet(m_startingRange);
 
 		for (int i = m_startingRange; i < m_endRange; i++) {
 			IpAddressInfo current = new IpAddressInfo();
 			for (int j = 1; j <= oHB.binNeeded.length; j++) {
-				String currentIp = printIP(convertToIP(wholeString(oLB.binaryString, oSB.rangeBinary, oHB.binNeeded[j - 1])));
+				String currentIp = printIP(convertToIP(wholeString(this.lockedBits.getBinaryString(), this.subnetBits.getRangeBinary(), oHB.binNeeded[j - 1])));
 				switch (j) {
 					case 1:
 						current.setWireAddress(currentIp);
@@ -112,29 +96,14 @@ public class SNCalc {
 						current.setLastHost(currentIp);
 						break;
 					case 4:
-						current.setNetworkAddress(currentIp);
+						current.setBroadcastAddress(currentIp);
 						break;
 				}
 			}
 			ips.add(current);
-			oSB.addOne(oSB.rangeBinary);
+			subnetBits.addOne(this.subnetBits.getRangeBinary());
 		}
 		return  ips;
-	}
-
-	public String getSubnetMask() {
-		String binary = "";
-		int count = 0;
-
-		while (count < m_suffix) {
-			binary += "1";
-			count++;
-		}
-		while (binary.length() < 32) {
-			binary += "0";
-		}
-
-		return binary;
 	}
 
 }
