@@ -84,6 +84,7 @@ public class SNCalc {
 			IpAddressInfo current = new IpAddressInfo();
 			for (int j = 0; j < oHB.binNeeded.length; j++) {
 				String currentIp = printIP(convertToIP(wholeString(this.lockedBits.getBinaryString(), this.subnetBits.getRangeBinary(), oHB.binNeeded[j])));
+				current.setSeq(i);
 				switch (j) {
 					case 0:
 						current.setWireAddress(currentIp);

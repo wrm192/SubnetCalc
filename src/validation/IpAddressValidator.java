@@ -15,7 +15,9 @@ public class IpAddressValidator {
             throw new InvalidSuffixException("Suffix must be between 8-31");
         }
 
-        //TODO found out the rest of logic for suffix, totally forget this shit
+        
+
+        //TODO find out the rest of logic for suffix, totally forget this shit
     }
 
     public static void validateIP(String ipAddress) {

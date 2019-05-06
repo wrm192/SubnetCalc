@@ -18,10 +18,9 @@ public class SubnetCalculatorService {
         IpAddressValidator.validateSuffix(ip, suffix);
         StringBuilder wholeBin = new StringBuilder();
         String[] split = ip.split("\\."); // parse the string for the following format.
-        Arrays.stream(split).forEach((s) -> wholeBin.append(String.format("%08d", Integer.valueOf(Integer.toBinaryString(Integer.parseInt(s))))));
+        Arrays.stream(split).forEach(s -> wholeBin.append(String.format("%08d", Integer.valueOf(Integer.toBinaryString(Integer.parseInt(s))))));
 
         SNCalc oSNC = new SNCalc(suffix, wholeBin.toString());
-
         List<IpAddressInfo> addressInfos = oSNC.buildListOfSubnets();
         IpAddressResponse ipAddressResponse = new IpAddressResponse(ip, suffix, addressInfos);
         ipAddressResponse.setNumOfSubnets(oSNC.getNumOfSubnets());

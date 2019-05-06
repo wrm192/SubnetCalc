@@ -6,6 +6,7 @@ public class IpAddressInfo {
     private String firstHost;
     private String lastHost;
     private String broadcastAddress;
+    private int seq;
 
     public String getWireAddress() {
         return wireAddress;
@@ -38,5 +39,9 @@ public class IpAddressInfo {
     public void setBroadcastAddress(String broadcastAddress) {
         this.broadcastAddress = broadcastAddress;
     }
+
+    public int getSeq() { return seq; }
+
+    public void setSeq(int seq) { this.seq = seq; }
 }
 

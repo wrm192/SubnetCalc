@@ -7,6 +7,7 @@ import src.dto.IpAddressResponse;
 import src.services.SubnetCalculatorService;
 
 @RestController
+@CrossOrigin
 public class SubnetDataController {
 
     private SubnetCalculatorService subnetCalculatorService;
@@ -19,8 +20,8 @@ public class SubnetDataController {
     @GetMapping(value = "/api/subnet", produces = "application/json")
     public IpAddressResponse getSubnetData(
             @RequestParam(value = "ip" ) String ip,
-            @RequestParam(value = "suffix", required = false) String suffix
+            @RequestParam(value = "suffix", required = false) int suffix
     ) {
-        return this.subnetCalculatorService.buildIpList(ip, Integer.parseInt(suffix));
+        return this.subnetCalculatorService.buildIpList(ip, suffix);
     }
 }
