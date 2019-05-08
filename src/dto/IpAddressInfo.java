@@ -40,8 +40,23 @@ public class IpAddressInfo {
         this.broadcastAddress = broadcastAddress;
     }
 
-    public int getSeq() { return seq; }
+    public int getSeq() {
+        return seq;
+    }
 
-    public void setSeq(int seq) { this.seq = seq; }
+    public void setSeq(int seq) {
+        this.seq = seq;
+    }
+
+    @Override
+    public String toString() {
+        return "IpAddressInfo{" +
+                "wireAddress='" + wireAddress + '\'' +
+                ", firstHost='" + firstHost + '\'' +
+                ", lastHost='" + lastHost + '\'' +
+                ", broadcastAddress='" + broadcastAddress + '\'' +
+                ", seq=" + seq +
+                '}';
+    }
 }
 
