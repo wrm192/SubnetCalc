@@ -3,9 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
-    <artifactId>myproject</artifactId>
+    <groupId>com.subnet</groupId>
+    <artifactId>calculator</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Subnet Calculator</name>
+    <description>Calculate a range of IP Address</description>
 
     <!-- Inherit defaults from Spring Boot -->
     <parent>
@@ -14,9 +18,14 @@
         <version>2.1.3.RELEASE</version>
     </parent>
 
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+
     <!-- Add typical dependencies for a web application -->
     <dependencies>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -39,13 +48,17 @@
     </dependencies>
 
     <!-- Package as an executable jar -->
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                </configuration>
             </plugin>
         </plugins>
     </build>
+
 
 </project>

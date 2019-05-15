@@ -1,4 +1,4 @@
-package src.calculations;
+package main.java.calculations;
 
 
 public class HostBits {

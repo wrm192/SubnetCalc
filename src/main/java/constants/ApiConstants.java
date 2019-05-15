@@ -1,4 +1,4 @@
-package src.constants;
+package main.java.constants;
 
 public class ApiConstants {
 

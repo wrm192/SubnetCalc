@@ -1,6 +1,6 @@
-package src.exceptions;
+package main.java.exceptions;
 
-public class InvalidRequestException extends RuntimeException{
+public class InvalidRequestException extends RuntimeException {
     public InvalidRequestException(String s) {
         super(s);
         System.out.println(s);

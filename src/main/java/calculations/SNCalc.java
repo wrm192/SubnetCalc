@@ -1,13 +1,12 @@
-package src.calculations;
+package main.java.calculations;
 
 
 import lombok.Data;
-import src.dto.IpAddressInfo;
-import src.exceptions.InvalidIpAddressException;
+import main.java.dto.IpAddressInfo;
+import main.java.exceptions.InvalidIpAddressException;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Data
 public class SNCalc {

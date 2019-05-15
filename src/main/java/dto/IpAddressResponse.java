@@ -1,4 +1,4 @@
-package src.dto;
+package main.java.dto;
 
 import lombok.Data;
 

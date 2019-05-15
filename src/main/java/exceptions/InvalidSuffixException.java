@@ -1,4 +1,4 @@
-package src.exceptions;
+package main.java.exceptions;
 
 public class InvalidSuffixException extends RuntimeException {
 
