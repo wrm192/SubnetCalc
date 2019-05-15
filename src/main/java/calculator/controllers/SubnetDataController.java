@@ -1,10 +1,13 @@
-package main.java.controllers;
+package calculator.controllers;
 
 
+import calculator.dto.IpAddressResponse;
+import calculator.services.SubnetCalculatorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import main.java.dto.IpAddressResponse;
-import main.java.services.SubnetCalculatorService;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin

@@ -1,9 +1,11 @@
-package main.java.validation;
+package calculator.validation;
 
 
-import main.java.exceptions.InvalidIpAddressException;
-import main.java.exceptions.InvalidRequestException;
-import main.java.exceptions.InvalidSuffixException;
+
+
+import calculator.exceptions.InvalidIpAddressException;
+import calculator.exceptions.InvalidRequestException;
+import calculator.exceptions.InvalidSuffixException;
 
 import java.util.Arrays;
 

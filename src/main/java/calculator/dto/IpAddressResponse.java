@@ -1,4 +1,4 @@
-package main.java.dto;
+package calculator.dto;
 
 import lombok.Data;
 

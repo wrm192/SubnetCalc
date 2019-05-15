@@ -1,4 +1,4 @@
-package main.java.exceptions;
+package calculator.exceptions;
 
 public class InvalidIpAddressException extends RuntimeException {
     public InvalidIpAddressException(String ipAddress) {

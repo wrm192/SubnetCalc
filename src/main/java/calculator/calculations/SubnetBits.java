@@ -1,5 +1,4 @@
-package main.java.calculations;
-
+package calculator.calculations;
 import lombok.Data;
 
 @Data

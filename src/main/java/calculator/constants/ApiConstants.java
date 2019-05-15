@@ -1,4 +1,4 @@
-package main.java.constants;
+package calculator.constants;
 
 public class ApiConstants {
 

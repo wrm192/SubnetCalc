@@ -1,4 +1,4 @@
-package main.java.exceptions;
+package calculator.exceptions;
 
 public class InvalidRequestException extends RuntimeException {
     public InvalidRequestException(String s) {

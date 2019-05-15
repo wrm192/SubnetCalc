@@ -1,10 +1,11 @@
-package main.java.services;
+package calculator.services;
 
-import main.java.validation.IpAddressValidator;
+
+import calculator.calculations.SNCalc;
+import calculator.dto.IpAddressInfo;
+import calculator.dto.IpAddressResponse;
+import calculator.validation.IpAddressValidator;
 import org.springframework.stereotype.Service;
-import main.java.calculations.SNCalc;
-import main.java.dto.IpAddressInfo;
-import main.java.dto.IpAddressResponse;
 
 import java.util.Arrays;
 import java.util.List;

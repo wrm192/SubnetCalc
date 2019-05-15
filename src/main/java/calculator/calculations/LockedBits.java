@@ -1,4 +1,4 @@
-package main.java.calculations;
+package calculator.calculations;
 
 class LockedBits {
 

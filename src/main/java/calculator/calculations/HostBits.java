@@ -1,5 +1,4 @@
-package main.java.calculations;
-
+package calculator.calculations;
 
 public class HostBits {
 
@@ -9,7 +8,7 @@ public class HostBits {
     //0 - Wire, 1- firstHost, 2- lastHost, 3- Broadcast, 4- Starting
     String[] binNeeded = new String[4];
 
-    HostBits(int suffix) {
+    public HostBits(int suffix) {
         this.hostBits = 32 - suffix;
         this.maxHosts = (int) Math.pow(2, this.hostBits);
 
@@ -24,7 +23,9 @@ public class HostBits {
         return maxHosts;
     }
 
-    private void setBin() {
+
+
+    public void setBin() {
         int count = 0;
         while (count < hostBits) {
             binNeeded[0] += "0";
