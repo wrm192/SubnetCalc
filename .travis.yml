@@ -1,8 +1,12 @@
 language: java
 
-before_install:
-  - cd java
+services:
+  docker
 
-script:
-  - ant test
+before_install:
+  - docker build . --tag subnet
+  - docker run subnet
+
+
+
 
