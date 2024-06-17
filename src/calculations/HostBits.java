@@ -1,6 +1,8 @@
 package src.calculations;
 
 
+//test
+
 public class HostBits {
 
 	private int hostBits;
